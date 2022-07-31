@@ -1,10 +1,9 @@
-package com.example.springbootsecuritywithjwt.model;
+package com.example.springbootsecuritywithjwt.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
-
 
 @NoArgsConstructor
 @Entity

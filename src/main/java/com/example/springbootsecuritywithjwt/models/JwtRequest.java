@@ -1,11 +1,10 @@
-package com.example.springbootsecuritywithjwt.model;
+package com.example.springbootsecuritywithjwt.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
-
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +19,4 @@ public class JwtRequest implements Serializable {
     @Getter
     @Setter
     private String password;
-
 }

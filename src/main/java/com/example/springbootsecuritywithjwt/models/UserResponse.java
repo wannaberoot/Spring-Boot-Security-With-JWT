@@ -1,10 +1,8 @@
-package com.example.springbootsecuritywithjwt.model;
+package com.example.springbootsecuritywithjwt.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.io.Serializable;
-
 
 @AllArgsConstructor
 public class UserResponse implements Serializable {

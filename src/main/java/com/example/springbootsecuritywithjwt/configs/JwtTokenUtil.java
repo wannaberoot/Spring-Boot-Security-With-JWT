@@ -1,4 +1,4 @@
-package com.example.springbootsecuritywithjwt.config;
+package com.example.springbootsecuritywithjwt.configs;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 
 @Component
 public class JwtTokenUtil implements Serializable {

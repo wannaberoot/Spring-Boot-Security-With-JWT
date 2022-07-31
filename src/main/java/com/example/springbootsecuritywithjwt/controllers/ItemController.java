@@ -1,10 +1,9 @@
-package com.example.springbootsecuritywithjwt.controller;
+package com.example.springbootsecuritywithjwt.controllers;
 
-import com.example.springbootsecuritywithjwt.model.ItemInfo;
-import com.example.springbootsecuritywithjwt.model.ItemRequest;
-import com.example.springbootsecuritywithjwt.model.ItemResponse;
-import com.example.springbootsecuritywithjwt.repository.ItemRepository;
-import com.example.springbootsecuritywithjwt.service.item.ItemService;
+import com.example.springbootsecuritywithjwt.models.ItemInfo;
+import com.example.springbootsecuritywithjwt.models.ItemRequest;
+import com.example.springbootsecuritywithjwt.models.ItemResponse;
+import com.example.springbootsecuritywithjwt.services.item.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,19 +17,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @RestController
 @Tag(name = "Item", description = "API for item.")
 @RequestMapping("/api")
 public class ItemController {
 
     private final ItemService itemService;
-    private final ItemRepository itemRepository;
 
     @Autowired
-    public ItemController(ItemService itemService, ItemRepository itemRepository) {
+    public ItemController(ItemService itemService) {
         this.itemService = itemService;
-        this.itemRepository = itemRepository;
     }
 
     @Operation(summary = "All Items", description = "Find all items.")
@@ -39,7 +35,7 @@ public class ItemController {
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ItemResponse.class)))) })
     @GetMapping("/item/all")
     public ResponseEntity<?> index() {
-        final List<ItemInfo> items = itemRepository.findAll();
+        final List<ItemInfo> items = itemService.getAllItems();
         return ResponseEntity.ok(items);
     }
 
@@ -49,7 +45,7 @@ public class ItemController {
                     content = @Content(schema = @Schema(implementation = ItemResponse.class))) })
     @GetMapping("/item/{id}")
     public ResponseEntity<?> searchItem(@PathVariable int id) {
-        final ItemInfo item = itemRepository.findItemById(id);
+        final ItemInfo item = itemService.getItem(id);
         return ResponseEntity.ok(new ItemResponse(item.getId(), item.getItemName()));
     }
 
@@ -59,9 +55,8 @@ public class ItemController {
                     content = @Content(schema = @Schema(implementation = ItemResponse.class))) })
     @PostMapping("/item")
     public ResponseEntity<?> createItem(@RequestBody ItemRequest itemRequest) {
-        final ItemInfo item = new ItemInfo(itemRequest.getItemName());
-        itemRepository.save(item);
-        return new ResponseEntity(new ItemResponse(item.getId(), item.getItemName()), HttpStatus.CREATED);
+        final ItemInfo newItem = itemService.createItem(itemRequest.getItemName());
+        return new ResponseEntity(new ItemResponse(newItem.getId(), newItem.getItemName()), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Update Item", description = "Update an item.")
@@ -70,9 +65,7 @@ public class ItemController {
                     content = @Content(schema = @Schema(implementation = ItemResponse.class))) })
     @PutMapping("/item/{id}/update")
     public ResponseEntity<?> updateItem(@PathVariable int id, @RequestBody ItemRequest itemRequest) {
-        ItemInfo itemToUpdate = itemRepository.findItemById(id);
-        itemToUpdate.setItemName(itemRequest.getItemName());
-        itemRepository.save(itemToUpdate);
+        final ItemInfo itemToUpdate = itemService.updateItem(id, itemRequest.getItemName());
         return new ResponseEntity(new ItemResponse(itemToUpdate.getId(), itemToUpdate.getItemName()), HttpStatus.CREATED);
     }
 
@@ -82,7 +75,7 @@ public class ItemController {
                     content = @Content(schema = @Schema(implementation = ItemResponse.class))) })
     @DeleteMapping("/item/{id}/delete")
     public ResponseEntity<?> deleteItem(@PathVariable int id) {
-        itemRepository.deleteById(id);
+        itemService.deleteItem(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
