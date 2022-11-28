@@ -7,16 +7,15 @@ import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
+@Table(name = "item_info")
+@Getter
+@Setter
 public class ItemInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
     @Column(name = "item_name")
     private String itemName;
 

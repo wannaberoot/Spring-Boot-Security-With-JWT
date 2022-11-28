@@ -4,30 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
-    <changeSet id="20220611" author="wannaberoot">
-        <createTable tableName="user">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="user_name" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
 
-        <createTable tableName="item">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true"/>
-            </column>
-            <column name="item_name" type="VARCHAR(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="20220612" author="wannaberoot">
+    <changeSet id="20221128" author="wannaberoot">
         <createTable tableName="user_info">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -39,7 +17,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
         <createTable tableName="item_info">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>

@@ -8,11 +8,11 @@ import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class ItemRequest implements Serializable {
 
     private static final long serialVersionUID = -3919347817565342894L;
 
-    @Getter
-    @Setter
     private String itemName;
 }
