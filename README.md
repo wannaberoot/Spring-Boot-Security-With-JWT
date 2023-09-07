@@ -1,7 +1,7 @@
 # Spring-Boot-Security-With-JWT
 Spring Boot Security application using JWT.
 
-## Technologies used in this project.
+## Technologies used in this project:
 1. Spring Security
 2. JWT
 3. Liquibase
